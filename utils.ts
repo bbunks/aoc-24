@@ -4,6 +4,10 @@ try {
 
 let allowLog = false;
 
+export function isLogging() {
+  return allowLog;
+}
+
 export function toggleLogging() {
   allowLog = !allowLog;
 }

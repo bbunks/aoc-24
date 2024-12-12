@@ -31,6 +31,14 @@ export class BRange {
     return "{" + this.value.join(",") + "}";
   }
 
+  map<T>(cb: (value: number) => T) {
+    return this.value.map(cb);
+  }
+
+  forEach<T>(cb: (value: number) => T) {
+    this.forEach(cb);
+  }
+
   concat(...ranges: BRange[]) {
     return ranges.reduce((prev, curr) => {
       return new BRange(prev.value.concat(curr.value));

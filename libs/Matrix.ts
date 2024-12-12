@@ -16,20 +16,26 @@ export class Matrix {
     });
   }
 
-  getValuesInRow(row: number) {
-    return this.data[row];
+  static blank(width: number, height: number, value = 0) {
+    return new Matrix(
+      range(0, height - 1).map(() => range(0, width - 1).map(() => value))
+    );
   }
 
-  getValuesInColumn(column: number) {
-    return this.data.map((row) => row[column]);
+  getValuesInRow(y: number) {
+    return this.data[y];
   }
 
-  getValueFromCords(col: number, row: number) {
-    return this.data[row][col];
+  getValuesInColumn(x: number) {
+    return this.data.map((row) => row[x]);
   }
 
-  setValueAtCords(col: number, row: number, value: number) {
-    this.data[row][col] = value;
+  getValueFromCords(x: number, y: number) {
+    return this.data[y][x];
+  }
+
+  setValueAtCords(x: number, y: number, value: number) {
+    this.data[y][x] = value;
   }
 
   add(matrix: Matrix) {
@@ -91,11 +97,11 @@ export class Matrix {
     const ends =
       this.rowCount === 1
         ? ["]"]
-        : ["⎤", ...range(1, this.columnCount - 2).value.map(() => "⎥"), "⎦"];
+        : ["⎤", ...range(1, this.columnCount - 2).map(() => "⎥"), "⎦"];
     const rows = (
       this.rowCount === 1
         ? ["["]
-        : ["⎡", ...range(1, this.columnCount - 2).value.map(() => "⎢"), "⎣"]
+        : ["⎡", ...range(1, this.columnCount - 2).map(() => "⎢"), "⎣"]
     ).map(
       (row, i) =>
         row +
